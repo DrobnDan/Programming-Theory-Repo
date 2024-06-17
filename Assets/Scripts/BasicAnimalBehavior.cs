@@ -6,9 +6,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BasicAnimalBehavior : MonoBehaviour
 {
-    [SerializeField] bool collidedWithGround = false;
+    protected bool collidedWithGround = false;
     private Rigidbody animalRB;
-    private float animalSpeed = 10.0f;
+    protected float animalSpeed = 10.0f;
     Vector3 randomPos = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -30,25 +30,25 @@ public class BasicAnimalBehavior : MonoBehaviour
     {
       if (other.gameObject.CompareTag("Ground") && !collidedWithGround)
         {
-            StabilizeAnimal();
+            StabilizeAnimal(animalRB);
             Invoke("UnfreezeRotation", 5);
             collidedWithGround = true;
         }
     }
 
-    private void UnfreezeRotation()
+    public void UnfreezeRotation()
     {
-        animalRB.freezeRotation = false;
+        gameObject.GetComponent<Rigidbody>().freezeRotation = false;
     }
 
-    private void StabilizeAnimal()
+    public void StabilizeAnimal(Rigidbody rb)
     {
-        animalRB.rotation = Quaternion.identity;
-        animalRB.velocity = Vector3.zero;
-        animalRB.freezeRotation = true;
+        rb.rotation = Quaternion.identity;
+        rb.velocity = Vector3.zero;
+        rb.freezeRotation = true;
     }
 
-    private void moveAnimalToRandomPos()
+    public void moveAnimalToRandomPos()
     {
         if (Vector3.Distance(transform.position, randomPos) < 1)
         {
@@ -57,7 +57,7 @@ public class BasicAnimalBehavior : MonoBehaviour
         MoveAndRotateToTargetPos();
     }
 
-    private void MoveAndRotateToTargetPos()
+    public void MoveAndRotateToTargetPos()
     {
         transform.position = Vector3.MoveTowards(transform.position, randomPos, animalSpeed * Time.deltaTime);
 
@@ -65,4 +65,15 @@ public class BasicAnimalBehavior : MonoBehaviour
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, .15f, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
+
+    public virtual void setAnimalSpeed()
+    {
+        animalSpeed = 10;
+    }
+
+    public virtual void setAnimalSpeed(float animSpeed)
+    {
+        animalSpeed *= 2;
+    }
+
 }

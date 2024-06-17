@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
     private int spawnHeight = 15;
     private float spawnX;
     private float spawnZ;
-    private int spawnDelay = 5;
+    private int spawnDelay = 3;
     private Quaternion spawnRotation = new Quaternion(0, 0, 0, 0);
 
     // Start is called before the first frame update
@@ -16,13 +16,6 @@ public class SpawnManager : MonoBehaviour
     {
         InvokeRepeating("SpawnAnimal", 0, spawnDelay);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public Vector3 GenerateSpawnPosition()
     {
         spawnZ = Random.Range(-8, 12);
