@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//INHERITANCE Child method inherets a lot of functionality from a parent method.
 public class SmallAnimalBehavior : BasicAnimalBehavior
 {
     private bool collidedWithGround = false;
@@ -32,6 +33,7 @@ public class SmallAnimalBehavior : BasicAnimalBehavior
         }
     }
 
+    //POLYMORPHISM Overriden method for different functionality in child class.
     public override void setAnimalSpeed()
     {
         animalSpeed = 20;

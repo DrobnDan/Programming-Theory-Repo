@@ -7,10 +7,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BasicAnimalBehavior : MonoBehaviour
 {
+    //ENCAPSULATION - Avoidance of public variables and use of secure variable permissions.
     protected bool collidedWithGround = false;
     private Rigidbody animalRB;
     protected float animalSpeed = 10.0f;
-    Vector3 randomPos = Vector3.zero;
+    private Vector3 randomPos = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +66,7 @@ public class BasicAnimalBehavior : MonoBehaviour
         MoveAndRotateToTargetPos();
     }
 
+    //ABSTRACTION Complex bulk of code packaged into a single, understandable method. 
     public void MoveAndRotateToTargetPos()
     {
         transform.position = Vector3.MoveTowards(transform.position, randomPos, animalSpeed * Time.deltaTime);
@@ -73,6 +76,7 @@ public class BasicAnimalBehavior : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
+    //POLYMORPHISM Overloaded method that does a similar thing, but for different uses
     public virtual void setAnimalSpeed()
     {
         animalSpeed = 10;
