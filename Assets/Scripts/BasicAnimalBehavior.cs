@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
 
 public class BasicAnimalBehavior : MonoBehaviour
@@ -33,6 +34,12 @@ public class BasicAnimalBehavior : MonoBehaviour
             StabilizeAnimal(animalRB);
             Invoke("UnfreezeRotation", 5);
             collidedWithGround = true;
+        }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene(0);
         }
     }
 
